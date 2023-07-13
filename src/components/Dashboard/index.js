@@ -19,14 +19,14 @@ const Dashboard = ({ setIsAuthenticated }) => {
     if (data !== null && Object.keys(data).length !== 0) setEmployees(data);
   }, []);
 
-  const handleEdit = id => {
-    const [employee] = employees.filter(employee => employee.id === id);
+  const handleEdit = (id) => {
+    const [employee] = employees.filter((employee) => employee.id === id);
 
     setSelectedEmployee(employee);
     setIsEditing(true);
   };
 
-  const handleDelete = id => {
+  const handleDelete = (id) => {
     Swal.fire({
       icon: 'warning',
       title: 'Are you sure?',
@@ -34,9 +34,9 @@ const Dashboard = ({ setIsAuthenticated }) => {
       showCancelButton: true,
       confirmButtonText: 'Yes, delete it!',
       cancelButtonText: 'No, cancel!',
-    }).then(result => {
+    }).then((result) => {
       if (result.value) {
-        const [employee] = employees.filter(employee => employee.id === id);
+        const [employee] = employees.filter((employee) => employee.id === id);
 
         Swal.fire({
           icon: 'success',
@@ -46,7 +46,7 @@ const Dashboard = ({ setIsAuthenticated }) => {
           timer: 1500,
         });
 
-        const employeesCopy = employees.filter(employee => employee.id !== id);
+        const employeesCopy = employees.filter((employee) => employee.id !== id);
         localStorage.setItem('employees_data', JSON.stringify(employeesCopy));
         setEmployees(employeesCopy);
       }
@@ -57,24 +57,11 @@ const Dashboard = ({ setIsAuthenticated }) => {
     <div className="container">
       {!isAdding && !isEditing && (
         <>
-          <Header
-            setIsAdding={setIsAdding}
-            setIsAuthenticated={setIsAuthenticated}
-          />
-          <Table
-            employees={employees}
-            handleEdit={handleEdit}
-            handleDelete={handleDelete}
-          />
+          <Header setIsAdding={setIsAdding} setIsAuthenticated={setIsAuthenticated} />
+          <Table employees={employees} handleEdit={handleEdit} handleDelete={handleDelete} />
         </>
       )}
-      {isAdding && (
-        <Add
-          employees={employees}
-          setEmployees={setEmployees}
-          setIsAdding={setIsAdding}
-        />
-      )}
+      {isAdding && <Add employees={employees} setEmployees={setEmployees} setIsAdding={setIsAdding} />}
       {isEditing && (
         <Edit
           employees={employees}

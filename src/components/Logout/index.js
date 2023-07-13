@@ -9,7 +9,7 @@ const Logout = ({ setIsAuthenticated }) => {
       text: 'Are you sure you want to log out?',
       showCancelButton: true,
       confirmButtonText: 'Yes',
-    }).then(result => {
+    }).then((result) => {
       if (result.value) {
         Swal.fire({
           timer: 1500,
@@ -27,11 +27,7 @@ const Logout = ({ setIsAuthenticated }) => {
   };
 
   return (
-    <button
-      style={{ marginLeft: '12px' }}
-      className="muted-button"
-      onClick={handleLogout}
-    >
+    <button style={{ marginLeft: '12px' }} className="muted-button" onClick={handleLogout}>
       Logout
     </button>
   );
